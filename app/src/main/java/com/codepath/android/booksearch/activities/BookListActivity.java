@@ -31,7 +31,9 @@ public class BookListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_book_list);
         lvBooks = (ListView) findViewById(R.id.lvBooks);
         ArrayList<Book> aBooks = new ArrayList<Book>();
+        // initialize the adapter
         bookAdapter = new BookAdapter(this, aBooks);
+        // attach the adapter to the ListView
         lvBooks.setAdapter(bookAdapter);
         // Fetch the data remotely
         fetchBooks();
@@ -53,7 +55,7 @@ public class BookListActivity extends ActionBarActivity {
                         final ArrayList<Book> books = Book.fromJson(docs);
                         // Load model objects into the adapter
                         for (Book book : books) {
-                            bookAdapter.add(book); // add movie through the adapter
+                            bookAdapter.add(book); // add book through the adapter
                         }
                         bookAdapter.notifyDataSetChanged();
                     }
