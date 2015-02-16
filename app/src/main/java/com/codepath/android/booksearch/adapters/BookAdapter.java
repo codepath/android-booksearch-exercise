@@ -46,7 +46,7 @@ public class BookAdapter extends ArrayAdapter<Book> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        // Populate the data into the template view using the data object
+        // Populate data into the template view using the data object
         viewHolder.tvTitle.setText(book.getTitle());
         viewHolder.tvAuthor.setText(book.getAuthor());
         Picasso.with(getContext()).load(Uri.parse(book.getCoverUrl())).placeholder(R.drawable.ic_nocover).into(viewHolder.ivCover);

@@ -43,7 +43,7 @@ public class Book {
             // Check if a cover edition is available
             if (jsonObject.has("cover_edition_key")) {
                 book.openLibraryId = jsonObject.getString("cover_edition_key");
-            } else {
+            } else if(jsonObject.has("edition_key")) {
                 final JSONArray ids = jsonObject.getJSONArray("edition_key");
                 book.openLibraryId = ids.getString(0);
             }

@@ -21,6 +21,11 @@ To achieve this, there are four different components in this app:
 3. `BookAdapter` - Responsible for mapping each `Book` to a particular view layout
 4. `BookListActivity` - Responsible for fetching and deserializing the data and configuring the adapter
 
+## Usage
+This app is intended to be the base project on top of which new features can be added. To use it, clone the project and import it using the following steps:
+
+![Imgur](http://i.imgur.com/joPKoTk.gif)
+
 ## Suggested Extensions
 
 1. Replace ActionBar with Toolbar
@@ -35,4 +40,3 @@ This app leverages two third-party libraries:
 
  * [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests
  * [Picasso](http://square.github.io/picasso/) - For remote image loading
-
