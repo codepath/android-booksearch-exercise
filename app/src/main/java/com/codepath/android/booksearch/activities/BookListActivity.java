@@ -11,8 +11,8 @@ import com.codepath.android.booksearch.adapters.BookAdapter;
 import com.codepath.android.booksearch.models.Book;
 import com.codepath.android.booksearch.net.BookClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-
 import org.apache.http.Header;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
