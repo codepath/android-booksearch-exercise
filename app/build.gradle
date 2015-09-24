@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    useLibrary 'org.apache.http.legacy'
     buildToolsVersion "23.0.0"
 
     defaultConfig {
