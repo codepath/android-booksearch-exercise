@@ -1,7 +1,7 @@
 package com.codepath.android.booksearch.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -11,7 +11,6 @@ import com.codepath.android.booksearch.adapters.BookAdapter;
 import com.codepath.android.booksearch.models.Book;
 import com.codepath.android.booksearch.net.BookClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import cz.msebera.android.httpclient.Header;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,8 +18,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 
-public class BookListActivity extends ActionBarActivity {
+
+public class BookListActivity extends AppCompatActivity {
     private ListView lvBooks;
     private BookAdapter bookAdapter;
     private BookClient client;
@@ -30,7 +31,7 @@ public class BookListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         lvBooks = (ListView) findViewById(R.id.lvBooks);
-        ArrayList<Book> aBooks = new ArrayList<Book>();
+        ArrayList<Book> aBooks = new ArrayList<>();
         // initialize the adapter
         bookAdapter = new BookAdapter(this, aBooks);
         // attach the adapter to the ListView
@@ -47,7 +48,7 @@ public class BookListActivity extends ActionBarActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONArray docs = null;
+                    JSONArray docs;
                     if(response != null) {
                         // Get the docs json array
                         docs = response.getJSONArray("docs");
@@ -65,6 +66,11 @@ public class BookListActivity extends ActionBarActivity {
                     // Invalid JSON format, show appropriate error.
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
     }
