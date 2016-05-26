@@ -69,11 +69,11 @@ public class Book {
 
     // Decodes array of book json results into business model objects
     public static ArrayList<Book> fromJson(JSONArray jsonArray) {
-        ArrayList<Book> books = new ArrayList<Book>(jsonArray.length());
+        ArrayList<Book> books = new ArrayList<>(jsonArray.length());
         // Process each result in json array, decode and convert to business
         // object
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject bookJson = null;
+            JSONObject bookJson;
             try {
                 bookJson = jsonArray.getJSONObject(i);
             } catch (Exception e) {

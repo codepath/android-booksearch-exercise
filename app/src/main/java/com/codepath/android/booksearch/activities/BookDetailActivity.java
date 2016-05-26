@@ -1,7 +1,7 @@
 package com.codepath.android.booksearch.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.codepath.android.booksearch.R;
 
-public class BookDetailActivity extends ActionBarActivity {
+public class BookDetailActivity extends AppCompatActivity {
     private ImageView ivBookCover;
     private TextView tvTitle;
     private TextView tvAuthor;
