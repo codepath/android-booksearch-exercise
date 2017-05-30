@@ -2,9 +2,10 @@ package com.codepath.android.booksearch.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
@@ -22,20 +23,28 @@ import cz.msebera.android.httpclient.Header;
 
 
 public class BookListActivity extends AppCompatActivity {
-    private ListView lvBooks;
+    private RecyclerView rvBooks;
     private BookAdapter bookAdapter;
     private BookClient client;
+    private ArrayList<Book> abooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
-        lvBooks = (ListView) findViewById(R.id.lvBooks);
-        ArrayList<Book> aBooks = new ArrayList<>();
+
+        rvBooks = (RecyclerView) findViewById(R.id.rvBooks);
+        abooks = new ArrayList<>();
+
         // initialize the adapter
-        bookAdapter = new BookAdapter(this, aBooks);
-        // attach the adapter to the ListView
-        lvBooks.setAdapter(bookAdapter);
+        bookAdapter = new BookAdapter(this, abooks);
+
+        // attach the adapter to the RecyclerView
+        rvBooks.setAdapter(bookAdapter);
+
+        // Set layout manager to position the items
+        rvBooks.setLayoutManager(new LinearLayoutManager(this));
+
         // Fetch the data remotely
         fetchBooks("Oscar Wilde");
     }
@@ -55,10 +64,10 @@ public class BookListActivity extends AppCompatActivity {
                         // Parse json array into array of model objects
                         final ArrayList<Book> books = Book.fromJson(docs);
                         // Remove all books from the adapter
-                        bookAdapter.clear();
+                        abooks.clear();
                         // Load model objects into the adapter
                         for (Book book : books) {
-                            bookAdapter.add(book); // add book through the adapter
+                            abooks.add(book); // add book through the adapter
                         }
                         bookAdapter.notifyDataSetChanged();
                     }

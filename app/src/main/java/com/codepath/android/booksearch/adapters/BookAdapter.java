@@ -2,10 +2,10 @@ package com.codepath.android.booksearch.adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,38 +14,55 @@ import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.models.Book;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class BookAdapter extends ArrayAdapter<Book> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
+    private List<Book> mBooks;
+    private Context mContext;
+
     // View lookup cache
-    private static class ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivCover;
         public TextView tvTitle;
         public TextView tvAuthor;
+
+        public ViewHolder(View itemView) {
+            // Stores the itemView in a public final member variable that can be used
+            // to access the context from any ViewHolder instance.
+            super(itemView);
+
+            ivCover = (ImageView)itemView.findViewById(R.id.ivBookCover);
+            tvTitle = (TextView)itemView.findViewById(R.id.tvTitle);
+            tvAuthor = (TextView)itemView.findViewById(R.id.tvAuthor);
+        }
     }
 
     public BookAdapter(Context context, ArrayList<Book> aBooks) {
-        super(context, 0, aBooks);
+        mBooks = aBooks;
+        mContext = context;
     }
 
-    // Translates a particular `Book` given a position
-    // into a relevant row within an AdapterView
+    // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        final Book book = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        ViewHolder viewHolder; // view lookup cache stored in tag
-        if (convertView == null) {
-            viewHolder = new ViewHolder();
-            LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_book, parent, false);
-            viewHolder.ivCover = (ImageView)convertView.findViewById(R.id.ivBookCover);
-            viewHolder.tvTitle = (TextView)convertView.findViewById(R.id.tvTitle);
-            viewHolder.tvAuthor = (TextView)convertView.findViewById(R.id.tvAuthor);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
+    public BookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        // Inflate the custom layout
+        View bookView = inflater.inflate(R.layout.item_book, parent, false);
+
+        // Return a new holder instance
+        BookAdapter.ViewHolder viewHolder = new BookAdapter.ViewHolder(bookView);
+        return viewHolder;
+    }
+
+
+    // Involves populating data into the item through holder
+    @Override
+    public void onBindViewHolder(BookAdapter.ViewHolder viewHolder, int position) {
+        // Get the data model based on position
+        Book book = mBooks.get(position);
+
         // Populate data into the template view using the data object
         viewHolder.tvTitle.setText(book.getTitle());
         viewHolder.tvAuthor.setText(book.getAuthor());
@@ -54,6 +71,16 @@ public class BookAdapter extends ArrayAdapter<Book> {
                 .placeholder(R.drawable.ic_nocover)
                 .into(viewHolder.ivCover);
         // Return the completed view to render on screen
-        return convertView;
+    }
+
+    // Returns the total count of items in the list
+    @Override
+    public int getItemCount() {
+        return mBooks.size();
+    }
+
+    // Easy access to the context object in the recyclerview
+    private Context getContext() {
+        return mContext;
     }
 }
