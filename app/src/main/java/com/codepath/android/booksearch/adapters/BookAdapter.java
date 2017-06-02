@@ -21,7 +21,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private Context mContext;
 
     // View lookup cache
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ivCover;
         public TextView tvTitle;
         public TextView tvAuthor;
