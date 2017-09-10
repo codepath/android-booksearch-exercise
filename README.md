@@ -10,9 +10,8 @@ The app does the following:
 
 1. Fetch the books from the [OpenLibrary Search API](https://openlibrary.org/dev/docs/api/search) in JSON format
 2. Deserialize the JSON data for each of the books into `Book` objects
-3. Build an array of `Book` objects and create an `ArrayAdapter` for those books
-4. Define `getView` to define how to inflate a layout for each book row and display each book's data.
-5. Attach the adapter for the books to a ListView to display the data on screen
+3. Build an array of `Book` objects and notify the adapter to display the new data. 
+4. Define a view holder so the adapter can render each book model. 
 
 To achieve this, there are four different components in this app:
 
