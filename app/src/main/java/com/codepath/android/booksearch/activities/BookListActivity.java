@@ -6,20 +6,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
 import com.codepath.android.booksearch.models.Book;
+import com.codepath.android.booksearch.models.converters.BookConverter;
+import com.codepath.android.booksearch.models.remote.BookQueryResponse;
+import com.codepath.android.booksearch.net.ApiCallback;
 import com.codepath.android.booksearch.net.BookClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
+import java.util.List;
 
 
 public class BookListActivity extends AppCompatActivity {
@@ -53,31 +48,15 @@ public class BookListActivity extends AppCompatActivity {
     // Converts them into an array of book objects and adds them to the adapter
     private void fetchBooks(String query) {
         client = new BookClient();
-        client.getBooks(query, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray docs;
-                    if (response != null) {
-                        // Get the docs json array
-                        docs = response.getJSONArray("docs");
-                        // Parse json array into array of model objects
-                        final ArrayList<Book> books = Book.fromJson(docs);
-                        // Remove all books from the adapter
-                        abooks.clear();
-                        // Load model objects into the adapter
-                        abooks.addAll(books);
-                        bookAdapter.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    // Invalid JSON format, show appropriate error.
-                    e.printStackTrace();
-                }
-            }
 
+        client.getBooks(query, new ApiCallback<BookQueryResponse>(BookQueryResponse.class) {
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+            public void onSuccess(BookQueryResponse response) {
+                List<Book> books = BookConverter.getBooks(response);
+                abooks.clear();
+                // Load model objects into the adapter
+                abooks.addAll(books);
+                bookAdapter.notifyDataSetChanged();
             }
         });
     }

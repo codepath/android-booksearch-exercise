@@ -32,4 +32,5 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
     implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
