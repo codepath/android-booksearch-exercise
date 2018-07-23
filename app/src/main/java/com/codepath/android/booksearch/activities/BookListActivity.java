@@ -58,7 +58,7 @@ public class BookListActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray docs;
-                    if(response != null) {
+                    if (response != null) {
                         // Get the docs json array
                         docs = response.getJSONArray("docs");
                         // Parse json array into array of model objects
@@ -66,9 +66,7 @@ public class BookListActivity extends AppCompatActivity {
                         // Remove all books from the adapter
                         abooks.clear();
                         // Load model objects into the adapter
-                        for (Book book : books) {
-                            abooks.add(book); // add book through the adapter
-                        }
+                        abooks.addAll(books);
                         bookAdapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
