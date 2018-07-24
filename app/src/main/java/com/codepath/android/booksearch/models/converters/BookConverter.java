@@ -14,16 +14,16 @@ public class BookConverter {
 
         List<BookQueryResponse.DocsBean> docs = response.getDocs();
         for (BookQueryResponse.DocsBean doc : docs) {
-            String opentLibraryId = doc.getCover_edition_key();
+            String openLibraryId = doc.getCover_edition_key();
 
             // we need to fetch openLibraryId, title and author
             // from the query response
 
-            if (TextUtils.isEmpty(opentLibraryId)) {
+            if (TextUtils.isEmpty(openLibraryId)) {
                 List<String> ids = doc.getEdition_key();
 
                 if (ids != null && !ids.isEmpty())
-                    opentLibraryId = ids.get(0);
+                    openLibraryId = ids.get(0);
 
             }
 
@@ -33,7 +33,7 @@ public class BookConverter {
             List<String> authorNames = doc.getAuthor_name();
             String authors = TextUtils.join(", ", authorNames);
 
-            Book book = new Book(opentLibraryId, title, authors);
+            Book book = new Book(openLibraryId, title, authors);
             books.add(book);
         }
 

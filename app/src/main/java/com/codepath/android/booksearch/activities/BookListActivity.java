@@ -31,24 +31,17 @@ public class BookListActivity extends AppCompatActivity {
         rvBooks = (RecyclerView) findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
 
-        // initialize the adapter
         bookAdapter = new BookAdapter(this, abooks);
-
-        // attach the adapter to the RecyclerView
         rvBooks.setAdapter(bookAdapter);
-
-        // Set layout manager to position the items
         rvBooks.setLayoutManager(new LinearLayoutManager(this));
+
+        client = new BookClient();
 
         // Fetch the data remotely
         fetchBooks("Oscar Wilde");
     }
 
-    // Executes an API call to the OpenLibrary search endpoint, parses the results
-    // Converts them into an array of book objects and adds them to the adapter
     private void fetchBooks(String query) {
-        client = new BookClient();
-
         client.getBooks(query, new ApiCallback<BookQueryResponse>(BookQueryResponse.class) {
             @Override
             public void onSuccess(BookQueryResponse response) {
@@ -81,5 +74,11 @@ public class BookListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        client.dispose();
     }
 }
