@@ -1,6 +1,9 @@
 ext{
     appcompat_version = "27.1.1"
     glide_version = "4.7.1"
+    retrofit_version = "2.4.0"
+    okhttp_version = "3.11.0"
+    gson_version = "2.8.5"
 
-    base_url = "\"http://openlibrary.org/\""
+    base_url = "\"http://openlibrary.org\""
 }
