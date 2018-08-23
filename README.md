@@ -6,6 +6,10 @@ Android app that leverages the [OpenLibrary API](https://openlibrary.org/develop
 
 ## Overview
 
+I've forked this repository in order to demonstrate refactoring of legacy code base into the latest used libraries + architectural patterns, right now.
+
+I'll be adding more wiki as I integrate the Suggested Extensions and Milestones
+
 The app does the following:
 
 1. Fetch the books from the [OpenLibrary Search API](https://openlibrary.org/dev/docs/api/search) in JSON format
@@ -19,11 +23,6 @@ To achieve this, there are four different components in this app:
 2. `Book` - Model object responsible for encapsulating the attributes for each individual book
 3. `BookAdapter` - Responsible for mapping each `Book` to a particular view layout
 4. `BookListActivity` - Responsible for fetching and deserializing the data and configuring the adapter
-
-## Usage
-This app is intended to be the base project on top of which new features can be added. To use it, clone the project and import it using the following steps:
-
-![Imgur](http://i.imgur.com/joPKoTk.gif)
 
 ## Suggested Extensions
 
