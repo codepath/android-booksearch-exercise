@@ -27,15 +27,14 @@ This app is intended to be the base project on top of which new features can be 
 
 ## Suggested Extensions
 
-- [x] Use SearchView to search for books with a title
+- [ ] Use SearchView to search for books with a title
 - [ ] Show ProgressBar before each network request
 - [ ] Add a detail view to display more information about the selected book from the list
 - [ ] Use a share intent to recommend a book to friends
 
-## Libraries
-
-~~This app leverages two third-party libraries:~~
-
- ~~* [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests~~
- ~~* [Picasso](http://square.github.io/picasso/) - For remote image loading~~
- 
+## Milestones
+- [x] Add Retrofit
+- [ ] Add Data Binding
+- [ ] Add RxJava
+- [ ] Add Dagger
+- [ ] Update to Material Design 2.0  
