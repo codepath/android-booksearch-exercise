@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ivBookCover"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="8dp" />
+    <data
+        class="BookAdapterBinding">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_toRightOf="@+id/ivBookCover"
-        android:text="Title"
-        android:textSize="24sp" />
+        <variable
+            name="viewModel"
+            type="com.codepath.android.booksearch.models.Book"/>
+    </data>
 
-    <TextView
-        android:id="@+id/tvAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/ivBookCover"
-        android:text="Author"
-        android:textSize="12sp" />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivBookCover"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="8dp"
+            app:imageUrl="@{viewModel.coverUrl}"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/ivBookCover"
+            android:text="@{viewModel.title}"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/tvAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitle"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/ivBookCover"
+            android:text="@{viewModel.author}"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+</layout>

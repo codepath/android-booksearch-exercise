@@ -1,12 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.BookListActivity">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvBooks"
+    <data
+        class="BookListingBinding"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvBooks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+</layout>

@@ -22,6 +22,10 @@ android {
             buildConfigField("String", "BASE_URL", "$rootProject.base_url")
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
