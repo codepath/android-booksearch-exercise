@@ -33,7 +33,7 @@ To achieve this, there are four different components in this app:
 
 ## Milestones
 - [x] Add Retrofit
-- [ ] Add Data Binding
+- [x] Add Data Binding
 - [ ] Add RxJava
 - [ ] Add Dagger
 - [ ] Update to Material Design 2.0  
