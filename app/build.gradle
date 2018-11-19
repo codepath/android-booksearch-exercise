@@ -15,14 +15,29 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "$rootProject.base_url")
         }
+
+        debug {
+            buildConfigField("String", "BASE_URL", "$rootProject.base_url")
+        }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.loopj.android:android-async-http:1.4.9'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation "com.android.support:appcompat-v7:$rootProject.appcompat_version"
+    implementation "com.android.support:recyclerview-v7:$rootProject.appcompat_version"
+
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.google.code.gson:gson:$rootProject.gson_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
 }

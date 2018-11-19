@@ -6,6 +6,10 @@ Android app that leverages the [OpenLibrary API](https://openlibrary.org/develop
 
 ## Overview
 
+I've forked this repository in order to demonstrate refactoring of legacy code base into the latest used libraries + architectural patterns, right now.
+
+I'll be adding more wiki as I integrate the Suggested Extensions and Milestones
+
 The app does the following:
 
 1. Fetch the books from the [OpenLibrary Search API](https://openlibrary.org/dev/docs/api/search) in JSON format
@@ -20,21 +24,16 @@ To achieve this, there are four different components in this app:
 3. `BookAdapter` - Responsible for mapping each `Book` to a particular view layout
 4. `BookListActivity` - Responsible for fetching and deserializing the data and configuring the adapter
 
-## Usage
-This app is intended to be the base project on top of which new features can be added. To use it, clone the project and import it using the following steps:
-
-![Imgur](http://i.imgur.com/joPKoTk.gif)
-
 ## Suggested Extensions
 
-1. Use SearchView to search for books with a title
-2. Show ProgressBar before each network request
-3. Add a detail view to display more information about the selected book from the list
-4. Use a share intent to recommend a book to friends
+- [ ] Use SearchView to search for books with a title
+- [ ] Show ProgressBar before each network request
+- [ ] Add a detail view to display more information about the selected book from the list
+- [ ] Use a share intent to recommend a book to friends
 
-## Libraries
-
-This app leverages two third-party libraries:
-
- * [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests
- * [Picasso](http://square.github.io/picasso/) - For remote image loading
+## Milestones
+- [x] Add Retrofit
+- [x] Add Data Binding
+- [ ] Add RxJava
+- [ ] Add Dagger
+- [ ] Update to Material Design 2.0  

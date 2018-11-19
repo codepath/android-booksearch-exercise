@@ -1,85 +1,70 @@
 package com.codepath.android.booksearch.activities;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
+import com.codepath.android.booksearch.databinding.BookListingBinding;
 import com.codepath.android.booksearch.models.Book;
-import com.codepath.android.booksearch.net.BookClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.codepath.android.booksearch.models.converters.BookConverter;
+import com.codepath.android.booksearch.models.remote.BookQueryResponse;
+import com.codepath.android.booksearch.remote.retrofitconfig.ApiCallback;
+import com.codepath.android.booksearch.remote.BookClient;
 
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
+import java.util.List;
 
 
 public class BookListActivity extends AppCompatActivity {
-    private RecyclerView rvBooks;
     private BookAdapter bookAdapter;
     private BookClient client;
     private ArrayList<Book> abooks;
 
+    private BookListingBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_list);
 
-        rvBooks = (RecyclerView) findViewById(R.id.rvBooks);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_book_list);
+
         abooks = new ArrayList<>();
 
-        // initialize the adapter
-        bookAdapter = new BookAdapter(this, abooks);
+        bookAdapter = new BookAdapter(abooks);
+        binding.rvBooks.setAdapter(bookAdapter);
+        binding.rvBooks.setLayoutManager(new LinearLayoutManager(this));
 
-        // attach the adapter to the RecyclerView
-        rvBooks.setAdapter(bookAdapter);
-
-        // Set layout manager to position the items
-        rvBooks.setLayoutManager(new LinearLayoutManager(this));
+        client = new BookClient();
 
         // Fetch the data remotely
         fetchBooks("Oscar Wilde");
     }
 
-    // Executes an API call to the OpenLibrary search endpoint, parses the results
-    // Converts them into an array of book objects and adds them to the adapter
     private void fetchBooks(String query) {
-        client = new BookClient();
-        client.getBooks(query, new JsonHttpResponseHandler() {
+        client.getBooks(query, new ApiCallback<BookQueryResponse>() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray docs;
-                    if(response != null) {
-                        // Get the docs json array
-                        docs = response.getJSONArray("docs");
-                        // Parse json array into array of model objects
-                        final ArrayList<Book> books = Book.fromJson(docs);
-                        // Remove all books from the adapter
-                        abooks.clear();
-                        // Load model objects into the adapter
-                        for (Book book : books) {
-                            abooks.add(book); // add book through the adapter
-                        }
-                        bookAdapter.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    // Invalid JSON format, show appropriate error.
-                    e.printStackTrace();
-                }
+            public void onSuccess(BookQueryResponse response) {
+                List<Book> books = BookConverter.getBooks(response);
+                abooks.clear();
+
+                // Load model objects into the adapter
+                abooks.addAll(books);
+                bookAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+            public void onFailure(int code, String response) {
+                // todo: handle this
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                //todo: show internet not available
             }
         });
     }
@@ -104,5 +89,11 @@ public class BookListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        client.dispose();
     }
 }

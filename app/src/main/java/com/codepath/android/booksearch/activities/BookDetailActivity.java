@@ -1,5 +1,6 @@
 package com.codepath.android.booksearch.activities;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.android.booksearch.R;
+import com.codepath.android.booksearch.databinding.BookDetailBinding;
 
 public class BookDetailActivity extends AppCompatActivity {
     private ImageView ivBookCover;
@@ -17,11 +19,8 @@ public class BookDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_detail);
         // Fetch views
-        ivBookCover = (ImageView) findViewById(R.id.ivBookCover);
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
-        tvAuthor = (TextView) findViewById(R.id.tvAuthor);
+        BookDetailBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_book_detail);
 
         // Extract book object from intent extras
 
