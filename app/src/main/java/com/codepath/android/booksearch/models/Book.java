@@ -27,7 +27,7 @@ public class Book {
 
     // Get book cover from covers API
     public String getCoverUrl() {
-        return "http://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
+        return "https://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
     }
 
     // Returns a Book given the expected JSON

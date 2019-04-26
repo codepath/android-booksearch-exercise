@@ -33,7 +33,7 @@ public class BookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
-        rvBooks = (RecyclerView) findViewById(R.id.rvBooks);
+        rvBooks = findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
 
         // initialize the adapter
