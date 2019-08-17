@@ -1,7 +1,7 @@
 package com.codepath.android.booksearch.net;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

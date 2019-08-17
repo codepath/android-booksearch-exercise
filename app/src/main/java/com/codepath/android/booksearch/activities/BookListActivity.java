@@ -1,25 +1,26 @@
 package com.codepath.android.booksearch.activities;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
 import com.codepath.android.booksearch.models.Book;
 import com.codepath.android.booksearch.net.BookClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.Header;
+import okhttp3.Headers;
 
 
 public class BookListActivity extends AppCompatActivity {
@@ -54,13 +55,15 @@ public class BookListActivity extends AppCompatActivity {
     private void fetchBooks(String query) {
         client = new BookClient();
         client.getBooks(query, new JsonHttpResponseHandler() {
+
+
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Headers headers, JSON response) {
                 try {
                     JSONArray docs;
-                    if(response != null) {
+                    if (response != null) {
                         // Get the docs json array
-                        docs = response.getJSONArray("docs");
+                        docs = response.jsonObject.getJSONArray("docs");
                         // Parse json array into array of model objects
                         final ArrayList<Book> books = Book.fromJson(docs);
                         // Remove all books from the adapter
@@ -78,8 +81,10 @@ public class BookListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                super.onFailure(statusCode, headers, responseString, throwable);
+            public void onFailure(int statusCode, Headers headers, String responseString, Throwable throwable) {
+                // Handle failed request here
+                Log.e(BookListActivity.class.getSimpleName(),
+                        "Request failed with code " + statusCode + ". Response message: " + responseString);
             }
         });
     }
