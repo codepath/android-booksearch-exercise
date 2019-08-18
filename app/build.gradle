@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId "com.codepath.android.booksearch"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -18,13 +18,19 @@ android {
     }
 }
 
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.loopj.android:android-async-http:1.4.9'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+ext {
+    appCompatVersion = '1.0.0'
+    glideVersion = '4.9.0'
+    annotationProcessorVersion = '1.1.0'
+    asyncHttpClientVersion = '0.0.5'
+}
 
-    annotationProcessor 'androidx.annotation:annotation:1.1.0'
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.codepath.libraries:asynchttpclient:$asyncHttpClientVersion"
+    implementation "androidx.recyclerview:recyclerview:$appCompatVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    annotationProcessor "androidx.annotation:annotation:$annotationProcessorVersion"
 }
