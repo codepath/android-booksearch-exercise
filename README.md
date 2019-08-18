@@ -36,5 +36,5 @@ This app is intended to be the base project on top of which new features can be 
 
 This app leverages two third-party libraries:
 
- * [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests
+ * [AsyncHttpClient](https://github.com/codepath/AsyncHttpClient) - For asynchronous network requests
  * [Picasso](http://square.github.io/picasso/) - For remote image loading
