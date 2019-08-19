@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,10 +39,24 @@ public class BookListActivity extends AppCompatActivity {
         rvBooks = findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
 
-        // initialize the adapter
+        // Initialize the adapter
         bookAdapter = new BookAdapter(this, abooks);
+        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Toast.makeText(
+                        BookListActivity.this,
+                        "An item at position " + position + " clicked!",
+                        Toast.LENGTH_SHORT).show();
 
-        // attach the adapter to the RecyclerView
+                // Handle item click here:
+                // Create Intent to start BookDetailActivity
+                // Get Book at the given position
+                // Pass the book into details activity using extras
+            }
+        });
+
+        // Attach the adapter to the RecyclerView
         rvBooks.setAdapter(bookAdapter);
 
         // Set layout manager to position the items
