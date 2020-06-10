@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.codepath.android.booksearch.GlideApp;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.models.Book;
 
@@ -86,9 +87,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         // Populate data into the template view using the data object
         viewHolder.tvTitle.setText(book.getTitle());
         viewHolder.tvAuthor.setText(book.getAuthor());
-        GlideApp.with(getContext())
+
+        Glide.with(getContext())
                 .load(Uri.parse(book.getCoverUrl()))
-                .placeholder(R.drawable.ic_nocover)
+                .apply(new RequestOptions()
+                .placeholder(R.drawable.ic_nocover))
                 .into(viewHolder.ivCover);
         // Return the completed view to render on screen
     }
