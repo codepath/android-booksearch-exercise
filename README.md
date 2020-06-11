@@ -37,4 +37,4 @@ This app is intended to be the base project on top of which new features can be 
 This app leverages two third-party libraries:
 
  * [AsyncHttpClient](https://github.com/codepath/AsyncHttpClient) - For asynchronous network requests
- * [Picasso](http://square.github.io/picasso/) - For remote image loading
+ * [Glide](https://github.com/bumptech/glide) - For remote image loading
