@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,8 @@ public class BookListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
+
+        hookUpToolBar();
 
         rvBooks = findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
@@ -64,6 +67,12 @@ public class BookListActivity extends AppCompatActivity {
 
         // Fetch the data remotely
         fetchBooks("Oscar Wilde");
+    }
+
+    // tell activity to use toolbar
+    private void hookUpToolBar(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     // Executes an API call to the OpenLibrary search endpoint, parses the results
