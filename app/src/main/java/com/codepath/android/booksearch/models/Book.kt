@@ -10,11 +10,9 @@ class Book(
     var openLibraryId: String? = null,
     var author: String? = null,
     var title: String? = null,
-) {
-
     // Get book cover from covers API
-    val coverUrl: String
-        get() = "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
+    val coverUrl: String = "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
+) {
 
     companion object {
         // Returns a Book given the expected JSON
