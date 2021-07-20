@@ -34,6 +34,10 @@ class BookListActivity : AppCompatActivity() {
         setContentView(layout.activity_book_list)
         rvBooks = findViewById(id.rvBooks)
 
+        // Checkpoint #3
+        // Switch Activity to Use a Toolbar
+        // see http://guides.codepath.org/android/Using-the-App-ToolBar#using-toolbar-as-actionbar
+
         // Initialize the adapter
         bookAdapter = BookAdapter(this, booksList)
         bookAdapter.setOnItemClickListener (object : OnItemClickListener {
@@ -44,12 +48,14 @@ class BookListActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT).show()
 
                 // Handle item click here:
+                // Checkpoint #5
+                // Hook up Book Detail View
+                // see https://guides.codepath.org/android/Using-the-RecyclerView#attaching-click-handlers-using-listeners for setting up click listeners
+
                 // Create Intent to start BookDetailActivity
                 // Get Book at the given position
                 // Pass the book into details activity using extras
-
-                // see https://guides.codepath.com/android/Using-Intents-to-Create-Flows#passing-complex-data-in-a-bundle
-                // or see https://guides.codepath.com/android/Using-Parceler for using a 3rd party library
+                // see http://guides.codepath.org/android/Using-Intents-to-Create-Flows
             }
         })
         // Attach the adapter to the RecyclerView
@@ -97,6 +103,14 @@ class BookListActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_book_list, menu)
+        // Checkpoint #4
+        // Add SearchView to Toolbar
+        // Refer to http://guides.codepath.org/android/Extended-ActionBar-Guide#adding-searchview-to-actionbar guide for more details
+
+
+        // Checkpoint #7 Show Progress Bar
+        // see https://guides.codepath.org/android/Handling-ProgressBars#progress-within-actionbar
+
         return true
     }
 
