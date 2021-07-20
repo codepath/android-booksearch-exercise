@@ -56,6 +56,7 @@ class BookListActivity : AppCompatActivity() {
                 // Get Book at the given position
                 // Pass the book into details activity using extras
                 // see http://guides.codepath.org/android/Using-Intents-to-Create-Flows
+                // see kotlin-parcelize https://developer.android.com/kotlin/parcelize plugin to do this
             }
         })
         // Attach the adapter to the RecyclerView
