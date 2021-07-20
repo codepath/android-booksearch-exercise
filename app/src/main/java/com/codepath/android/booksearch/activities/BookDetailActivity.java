@@ -18,6 +18,7 @@ public class BookDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+
         // Fetch views
         ivBookCover = (ImageView) findViewById(R.id.ivBookCover);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
@@ -25,7 +26,11 @@ public class BookDetailActivity extends AppCompatActivity {
 
         // Extract book object from intent extras
 
-        // Use book object to populate data into views
+        // Checkpoint #5
+        // Reuse the Toolbar previously used in the detailed activity by referring to this guide
+        // Follow using a Toolbar guide to set the Toolbar as the ActionBar.
+        // Change activity title to reflect the book title by referring to the Configuring The ActionBar guide.
+        // (Bonus) Get additional book information like publisher and publish_year from the Books API and display in details view.
     }
 
 
@@ -33,6 +38,10 @@ public class BookDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_book_detail, menu);
+        // Checkpoint #6
+        // Add Share Intent
+        // see http://guides.codepath.org/android/Sharing-Content-with-Intents#shareactionprovider
+        // (Bonus) Share book title and cover image using the same intent.
         return true;
     }
 

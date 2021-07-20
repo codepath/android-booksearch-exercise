@@ -36,6 +36,10 @@ public class BookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
 
+        // Checkpoint #3
+        // Switch Activity to Use a Toolbar
+        // see http://guides.codepath.org/android/Using-the-App-ToolBar#using-toolbar-as-actionbar
+
         rvBooks = findViewById(R.id.rvBooks);
         abooks = new ArrayList<>();
 
@@ -50,9 +54,14 @@ public class BookListActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
 
                 // Handle item click here:
+                // Checkpoint #5
+                // Hook up Book Detail View
+                // see https://guides.codepath.org/android/Using-the-RecyclerView#attaching-click-handlers-using-listeners for setting up click listeners
+
                 // Create Intent to start BookDetailActivity
                 // Get Book at the given position
                 // Pass the book into details activity using extras
+                // see http://guides.codepath.org/android/Using-Intents-to-Create-Flows
             }
         });
 
@@ -71,7 +80,6 @@ public class BookListActivity extends AppCompatActivity {
     private void fetchBooks(String query) {
         client = new BookClient();
         client.getBooks(query, new JsonHttpResponseHandler() {
-
 
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON response) {
@@ -109,6 +117,13 @@ public class BookListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_book_list, menu);
+        // Checkpoint #4
+        // Add SearchView to Toolbar
+        // Refer to http://guides.codepath.org/android/Extended-ActionBar-Guide#adding-searchview-to-actionbar guide for more details
+
+
+        // Checkpoint #7 Show Progress Bar
+        // see https://guides.codepath.org/android/Handling-ProgressBars#progress-within-actionbar
         return true;
     }
 
